@@ -17,11 +17,21 @@ app.mount("/ui", StaticFiles(directory=static_path), name="ui")
 class Body(BaseModel):
     length: Union[int, None] = 20
 
+# Define a Pydantic model with fields 'text' and 'str', both of type string.    
+class TextBody(BaseModel):
+    text: str
+    str: str
+
 
 @app.get('/')
 def root():
     html_path = join(static_path, "index.html")
     return FileResponse(html_path)
+
+# Create a FastAPI endpoint that accepts a POST request with a JSON body containing a single field called "text" and returns a checksum of the text
+@app.post('/checksum')
+
+
 
 
 @app.post('/generate')
